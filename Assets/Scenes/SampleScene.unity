@@ -319,8 +319,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a32951ee9a78194ca290ab5793e8f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSpeed: 0.5
-  wood: 10
+  cameraSpeed: 0.3
+  wood: 0
   stone: 0
   selection: []
   selectionIcons: []

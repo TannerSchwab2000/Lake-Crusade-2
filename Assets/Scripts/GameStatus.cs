@@ -6,7 +6,7 @@ using System;
 
 public class GameStatus : MonoBehaviour {
 	//config params
-	public float cameraSpeed;
+	public float cameraSpeed = 0.3f;
 
 	//state
 	bool controlPressed;
@@ -184,10 +184,13 @@ public class GameStatus : MonoBehaviour {
 	{
 		for(var i=0;i<selectionIcons.Count;i++)
 		{
-			if(selectionIcons[i].transform.GetChild(0).name == name)
+			if(selectionIcons[i] != null)
 			{
-				return i;
-			}
+				if(selectionIcons[i].transform.GetChild(0).name == name)
+				{
+					return i;
+				}	
+			}	
 		}
 		return 0;
 	}
@@ -208,9 +211,12 @@ public class GameStatus : MonoBehaviour {
 	{
 		for(var i=0;i<selection.Count;i++)
 		{
-			if(selection[i].name == name)
+			if(selection[i] != null)
 			{
-				return selection[i];
+				if(selection[i].name == name)
+				{
+					return selection[i];
+				}	
 			}
 		}
 		return null;
@@ -285,9 +291,12 @@ public class GameStatus : MonoBehaviour {
 
 	bool CurrentBuildOptionsContains(string name)
 	{
-		if(currentBuildOptions.transform.Find(name) != null)
+		if(currentBuildOptions != null)
 		{
-			return true;
+			if(currentBuildOptions.transform.Find(name) != null)
+			{
+				return true;
+			}			
 		}
 		return false;
 	}
@@ -402,7 +411,7 @@ public class GameStatus : MonoBehaviour {
 		int count = 0;
 		for(var i=0;i<selection.Count;i++)
 		{
-			if(selection != null)
+			if(selection[i] != null)
 			{
 				if(selection[i].name == name)
 				{

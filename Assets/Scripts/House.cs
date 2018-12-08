@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class House : MonoBehaviour {
 	//config params
+	public int maxUnits = 5;
 
 	//state
-	List<GameObject> unitsInside;
+	public List<GameObject> unitsInside;
 
 	//cached component reference
 	GameStatus gameStatus;
@@ -51,14 +52,17 @@ public class House : MonoBehaviour {
 
 	void UpdateUnitListUI()
 	{
-		ClearUnitListUI();
-		if(unitsInside != null)
+		for(var i=0;i<unitsInside.Count;i++)
 		{
-			for(var i=0;i<unitsInside.Count;i++)
+			if(unitsInside[i] != null)
 			{
-				CreateUnitIcon(unitsInside[i].name, unitsInside[i].GetComponent<SpriteRenderer>().sprite);
-			}	
-		}	
+				CreateUnitIcon(unitsInside[i].name, unitsInside[i].GetComponent<SpriteRenderer>().sprite);	
+			}
+		}		
+		if(unitsInside.Count < 1)
+		{
+			ClearUnitListUI();
+		}
 	}
 
 	void CreateUI()
@@ -105,6 +109,24 @@ public class House : MonoBehaviour {
 		if(!gameStatus.SelectionContains(gameObject))
 		{
 			gameStatus.SelectObject(gameObject);
+		}
+	}
+
+	void OnMouseOver()
+	{
+		if(Input.GetMouseButtonDown(1))
+		{
+			for(var i=0;i<gameStatus.selection.Count;i++)
+			{
+				if(gameStatus.selection[i].GetComponent<Unit>() != null)
+				{
+					if(!gameStatus.selection[i].GetComponent<Unit>().doingJob)
+					{
+						gameStatus.selection[i].GetComponent<Unit>().StartJob("EnterBuilding", gameObject);	
+						gameStatus.selection[i].GetComponent<Unit>().SetTargetPos((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition));	
+					}	
+				}
+			}		
 		}
 	}
 }

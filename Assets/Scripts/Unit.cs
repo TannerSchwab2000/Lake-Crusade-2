@@ -150,7 +150,17 @@ public class Unit : MonoBehaviour {
 	     				job = null;
 	     				jobSite = null;
 	     			}
-	     		}		
+	     		}
+	     		else if(job == "EnterBuilding"/* && jobSite.GetComponent<House>().unitsInside.Count < jobSite.GetComponent<House>().maxUnits*/)	
+	     		{
+	     			Debug.Log("entered building");
+	     			if(doingJob)
+	     			{
+	     				doingJob = false;
+	     				jobSite.GetComponent<House>().unitsInside.Add(gameObject);
+	     				Destroy(gameObject);
+	     			}
+	     		}	
 	     	}
 		}
 		else
