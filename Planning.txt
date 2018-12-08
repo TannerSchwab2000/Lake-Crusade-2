@@ -1,0 +1,6 @@
+Each house has a max population. The population of a house grows depending on how many people are in it
+and what the tax rate is.
+
+In order to build something you need to have a peasant selected with whatever building materials he
+needs in his inventory along with how every many slaves you need.
+
