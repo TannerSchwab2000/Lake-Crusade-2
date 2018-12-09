@@ -151,17 +151,28 @@ public class Unit : MonoBehaviour {
 	     				jobSite = null;
 	     			}
 	     		}
-	     		else if(job == "EnterBuilding"/* && jobSite.GetComponent<House>().unitsInside.Count < jobSite.GetComponent<House>().maxUnits*/)	
+	     		else if(job == "EnterBuilding" && jobSite.GetComponent<House>().unitsInside.Count < jobSite.GetComponent<House>().maxUnits)	
 	     		{
 	     			if(doingJob)
 	     			{
 	     				doingJob = false;
-	     				var houseUnit = Instantiate(gameStatus.peasant);
-	     				houseUnit.name = gameObject.name;
-	     				houseUnit.gameObject.SetActive(false);
-	     				jobSite.GetComponent<House>().unitsInside.Add(houseUnit.gameObject);
+	     				if(gameObject.name == "Peasant")
+	     				{
+							var houseUnit = Instantiate(gameStatus.peasant);
+		     				houseUnit.name = gameObject.name;
+		     				houseUnit.gameObject.SetActive(false);
+		     				jobSite.GetComponent<House>().unitsInside.Add(houseUnit.gameObject);
+	     				}
+	     				else if(gameObject.name == "Slave")
+	     				{
+	     					var houseUnit = Instantiate(gameStatus.slave);
+		     				houseUnit.name = gameObject.name;
+		     				houseUnit.gameObject.SetActive(false);
+		     				jobSite.GetComponent<House>().unitsInside.Add(houseUnit.gameObject);
+	     				}
 	     				ClearUI();
-	     				Destroy(gameObject);
+		     			gameStatus.RemoveSelection(gameObject.name);
+		     			Destroy(gameObject);
 	     			}
 	     		}	
 	     	}

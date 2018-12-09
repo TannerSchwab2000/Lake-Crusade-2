@@ -116,12 +116,16 @@ public class GameStatus : MonoBehaviour {
 			selectionIcons.Clear();
 		}
 	}
-	
-	public void RemoveSelection(string name)
+
+	public void ClearSelectionIcons()
 	{
-		selection.Remove(GetSelection(name));
-		selectionIcons.Remove(GetSelectionIcon(name));
+		for(var i=0;i<selectionIcons.Count;i++)
+		{
+			Destroy(selectionIcons[i]);
+		}
+		selectionIcons.Clear();
 	}
+
 
 	void DisplaySelection()
 	{
@@ -140,7 +144,7 @@ public class GameStatus : MonoBehaviour {
 					UpdateSelectionIcon(currentName);
 				}	
 			}
-		}	
+		}
 	}
 
 	void DisplayCurrentBuilding()
@@ -182,7 +186,21 @@ public class GameStatus : MonoBehaviour {
 		}
 	}
 
-	int GetSelectionIconIndex(string name)
+	public void RemoveSelection(string name)
+	{
+		for(var i=0;i<selection.Count;i++)
+		{
+			if(selection[i] != null)
+			{
+				if(selection[i].name == name)
+				{
+					selection.RemoveAt(i);
+				}
+			}
+		}
+	}
+
+	public int GetSelectionIconIndex(string name)
 	{
 		for(var i=0;i<selectionIcons.Count;i++)
 		{
@@ -197,14 +215,29 @@ public class GameStatus : MonoBehaviour {
 		return 0;
 	}
 
+	int GetSelectionIndex(GameObject referencedGameObject)
+	{
+		for(var i=0;i<selection.Count;i++)
+		{
+			if(selection[i] == referencedGameObject)
+			{
+				return i;
+			}
+		}
+		return 0;
+	}
+
 	GameObject GetSelectionIcon(string name)
 	{
 		for(var i=0;i<selectionIcons.Count;i++)
 		{
-			if(selectionIcons[i].transform.GetChild(0).name == name)
+			if(selectionIcons[i] != null)
 			{
-				return selectionIcons[i];
-			}
+				if(selectionIcons[i].transform.GetChild(0).name == name)
+				{
+					return selectionIcons[i];
+				}	
+			}	
 		}
 		return null;
 	}
@@ -380,7 +413,7 @@ public class GameStatus : MonoBehaviour {
 	void UpdateSelectionIcon(string name)
 	{
 		GetSelectionIcon(name).transform.GetChild(0).Find("Number").GetComponent<Text>().text = "x" + CountSelectionWithName(name).ToString();
-		GetSelectionIcon(name).transform.GetComponent<RectTransform>().localPosition = new Vector2(-612 + GetSelectionIconIndex(name)*100, -449);
+		GetSelectionIcon(name).transform.GetComponent<RectTransform>().localPosition = new Vector2(-612 + GetSelectionIconIndex(name)*100, -449);		
 	}
 
 	void CreateSelectionIcon(string name, Sprite sprite, GameObject representedObject)
@@ -393,6 +426,7 @@ public class GameStatus : MonoBehaviour {
 		currentSelectionIcon.transform.GetChild(0).Find("Number").GetComponent<Text>().text = "x" + CountSelectionWithName(name).ToString();	
 		currentSelectionIcon.transform.GetComponent<RectTransform>().localPosition = new Vector2(-612 + (selectionIcons.Count-1)*100, -449);
 		currentSelectionIcon.transform.GetChild(0).GetComponent<RectTransform>().localScale = new Vector2(representedObject.GetComponent<SpriteRenderer>().bounds.size.x, representedObject.GetComponent<SpriteRenderer>().bounds.size.y);
+		currentSelectionIcon.GetComponent<SelectionIcon>().representedObject = representedObject;
 		FixSize(currentSelectionIcon);
 	}
 
@@ -428,9 +462,12 @@ public class GameStatus : MonoBehaviour {
 	{
 		for(var i=0;i<selectionIcons.Count;i++)
 		{
-			if(selectionIcons[i].transform.GetChild(0).name == name)
+			if(selectionIcons[i] != null)
 			{
-				return true;
+				if(selectionIcons[i].transform.GetChild(0).name == name)
+				{
+					return true;
+				}	
 			}
 		}
 		return false;

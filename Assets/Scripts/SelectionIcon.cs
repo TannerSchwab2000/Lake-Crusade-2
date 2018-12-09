@@ -10,6 +10,7 @@ public class SelectionIcon : MonoBehaviour {
 
 	//cached component reference
 	GameStatus gameStatus;
+	public GameObject representedObject;
 
 	void Start () {
 		gameStatus = FindObjectOfType<GameStatus>();
@@ -21,8 +22,8 @@ public class SelectionIcon : MonoBehaviour {
 
 	public void ButtonClicked()
 	{
-		gameStatus.RemoveSelection(gameObject.transform.GetChild(0).name);
-		Destroy(gameObject);
+		Destroy(gameStatus.selectionIcons[gameStatus.GetSelectionIconIndex(transform.GetChild(0).name)]);
+		gameStatus.selectionIcons.RemoveAt(gameStatus.GetSelectionIconIndex(gameStatus.selectionIcons[gameStatus.GetSelectionIconIndex(transform.GetChild(0).name)].name));
 	}
 
 

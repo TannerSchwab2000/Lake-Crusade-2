@@ -86,6 +86,7 @@ public class House : MonoBehaviour {
 		var newUnitIcon = Instantiate(unitIcon);
 		newUnitIcon.transform.SetParent(currentUI.transform.Find("UnitList").transform, false);
 		newUnitIcon.name = name;
+		newUnitIcon.transform.Find("Text").GetComponent<Text>().text = name;
 		newUnitIcon.transform.Find("Image").GetComponent<Image>().sprite = sprite;
 		newUnitIcon.GetComponent<UnitListIcon>().index = index;
 		newUnitIcon.GetComponent<UnitListIcon>().house = gameObject;
