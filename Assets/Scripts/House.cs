@@ -56,20 +56,13 @@ public class House : MonoBehaviour {
 		{
 			if(unitsInside[i] != null)
 			{
-				if(unitsInside.Count < currentUI.transform.Find("UnitList").childCount)
-				{
-					ClearUnitListUI();
-				}
-				else if(i+1 > currentUI.transform.Find("UnitList").childCount)
-				{
-					CreateUnitIcon(unitsInside[i].name, unitsInside[i].GetComponent<SpriteRenderer>().sprite, i);	
-				}	
-				else
-				{
-					currentUI.transform.Find("UnitList").GetChild(i).GetComponent<RectTransform>().localPosition = new Vector2(-1.8f, 0.2f);
-				}
+				CreateUnitIcon(unitsInside[i].name, unitsInside[i].GetComponent<SpriteRenderer>().sprite);	
 			}
 		}		
+		if(unitsInside.Count < 1)
+		{
+			ClearUnitListUI();
+		}
 	}
 
 	void CreateUI()
@@ -81,15 +74,13 @@ public class House : MonoBehaviour {
 		}
 	}
 
-	void CreateUnitIcon(string name, Sprite sprite, int index)
+	void CreateUnitIcon(string name, Sprite sprite)
 	{
 		var newUnitIcon = Instantiate(unitIcon);
 		newUnitIcon.transform.SetParent(currentUI.transform.Find("UnitList").transform, false);
 		newUnitIcon.name = name;
 		newUnitIcon.transform.Find("Text").GetComponent<Text>().text = name;
 		newUnitIcon.transform.Find("Image").GetComponent<Image>().sprite = sprite;
-		newUnitIcon.GetComponent<UnitListIcon>().index = index;
-		newUnitIcon.GetComponent<UnitListIcon>().house = gameObject;
 	}
 
 	void ClearUI()

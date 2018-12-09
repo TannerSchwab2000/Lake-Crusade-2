@@ -438,8 +438,6 @@ MonoBehaviour:
     type: 2}
   stockpile: {fileID: 1623046904102044, guid: 08a61a8c9394b5d40942eb3363f1a7ae, type: 2}
   house: {fileID: 1178927524900700, guid: 3c483aa5035691b4288bd64d30db8e4e, type: 2}
-  peasant: {fileID: 1589916168936836, guid: af6b93b52712bce4782d963daadeca5e, type: 2}
-  slave: {fileID: 1612703793224644, guid: 2a6247e8bf65db14894b230a181cecae, type: 2}
 --- !u!4 &323521789
 Transform:
   m_ObjectHideFlags: 0

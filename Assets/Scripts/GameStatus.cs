@@ -25,10 +25,8 @@ public class GameStatus : MonoBehaviour {
 	[SerializeField] public GameObject resourcesUI;
 	[SerializeField] public GameObject stockpiledResourcesUI;
 	[SerializeField] public GameObject buildOptionsUI;
-	[SerializeField] public GameObject stockpile;
-	[SerializeField] public GameObject house;
-	[SerializeField] public GameObject peasant;
-	[SerializeField] public GameObject slave;
+	[SerializeField] GameObject stockpile;
+	[SerializeField] GameObject house;
 	Camera camera;
 
 	void Start () 

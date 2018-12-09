@@ -153,9 +153,11 @@ public class Unit : MonoBehaviour {
 	     		}
 	     		else if(job == "EnterBuilding" && jobSite.GetComponent<House>().unitsInside.Count < jobSite.GetComponent<House>().maxUnits)	
 	     		{
+	     			Debug.Log("entered building");
 	     			if(doingJob)
 	     			{
 	     				doingJob = false;
+<<<<<<< HEAD
 	     				if(gameObject.name == "Peasant")
 	     				{
 							var houseUnit = Instantiate(gameStatus.peasant);
@@ -173,6 +175,10 @@ public class Unit : MonoBehaviour {
 	     				ClearUI();
 		     			gameStatus.RemoveSelection(gameObject.name);
 		     			Destroy(gameObject);
+=======
+	     				jobSite.GetComponent<House>().unitsInside.Add(gameObject);
+	     				Destroy(gameObject);
+>>>>>>> parent of 77656a4... Worked on house.
 	     			}
 	     		}	
 	     	}
