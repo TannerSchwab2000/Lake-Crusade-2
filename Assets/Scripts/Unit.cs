@@ -153,11 +153,14 @@ public class Unit : MonoBehaviour {
 	     		}
 	     		else if(job == "EnterBuilding"/* && jobSite.GetComponent<House>().unitsInside.Count < jobSite.GetComponent<House>().maxUnits*/)	
 	     		{
-	     			Debug.Log("entered building");
 	     			if(doingJob)
 	     			{
 	     				doingJob = false;
-	     				jobSite.GetComponent<House>().unitsInside.Add(gameObject);
+	     				var houseUnit = Instantiate(gameStatus.peasant);
+	     				houseUnit.name = gameObject.name;
+	     				houseUnit.gameObject.SetActive(false);
+	     				jobSite.GetComponent<House>().unitsInside.Add(houseUnit.gameObject);
+	     				ClearUI();
 	     				Destroy(gameObject);
 	     			}
 	     		}	
